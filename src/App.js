@@ -17,7 +17,7 @@ class App extends Component {
                 {
                     id: 1,
                     content: "Todo 2",
-                    done: false
+                    done: true
                 }
             ]
         };
@@ -29,11 +29,33 @@ class App extends Component {
         this.setState({ todos });
     };
 
+    toggleDone = id => {
+        this.setState({
+            todos: this.state.todos.map(todo => {
+                if (todo.id === id) {
+                    todo.done = !todo.done;
+                }
+
+                return todo;
+            })
+        });
+    };
+
+    removeTodo = id => {
+        this.setState({
+            todos: this.state.todos.filter(todo => todo.id !== id)
+        });
+    };
+
     render() {
         return (
             <div>
                 <Navbar addTodo={this.addTodo} />
-                <Todos todos={this.state.todos} />
+                <Todos
+                    todos={this.state.todos}
+                    toggleDone={this.toggleDone}
+                    removeTodo={this.removeTodo}
+                />
             </div>
         );
     }

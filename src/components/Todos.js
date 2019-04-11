@@ -5,9 +5,22 @@ export class Todos extends Component {
         return (
             <div className="todolist">
                 {this.props.todos.map(todo => (
-                    <div key={todo.id} className="todoitem">
-                        <div className="todoitem__title">{todo.content}</div>
-                        <div className="todoitem__remove">remove</div>
+                    <div
+                        key={todo.id}
+                        className={"todoitem " + (todo.done ? "done" : "")}
+                    >
+                        <div
+                            className="todoitem__title"
+                            onClick={this.props.toggleDone.bind(this, todo.id)}
+                        >
+                            {todo.content}
+                        </div>
+                        <div
+                            className="todoitem__remove"
+                            onClick={this.props.removeTodo.bind(this, todo.id)}
+                        >
+                            remove
+                        </div>
                     </div>
                 ))}
             </div>
